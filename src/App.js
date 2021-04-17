@@ -2,8 +2,11 @@ import { useHookstate } from '@hookstate/core'
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
 import LoginCallbackGoogle from './componentes/LoginCallbackGoogle'
 import { autenticacao } from './estadosglobais/autenticacao'
+import Ativos from './paginas/Ativos'
+import Dashboard from './paginas/Dashboard'
 import Home from './paginas/Home'
 import Login from "./paginas/Login"
+import Relatorios from './paginas/Relatorios'
 
 function App() {
   const auth = useHookstate(autenticacao)
@@ -54,6 +57,18 @@ function App() {
 
         <Route exact path="/home">
           <Home />
+        </Route>
+
+        <Route exact path="/dashboard">
+          <Dashboard />
+        </Route>
+
+        <Route exact path="/ativos">
+          <Ativos />
+        </Route>
+
+        <Route exact path="/relatorios">
+          <Relatorios />
         </Route>
 
         <Route >

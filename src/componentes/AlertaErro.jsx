@@ -1,6 +1,5 @@
 import { Alert } from "@material-ui/lab"
 
-
 export default function AlertaErro(props) {
     if(props.msg === null || props.msg === "") {
         return null
