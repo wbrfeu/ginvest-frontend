@@ -1,44 +1,59 @@
-import { useState } from 'react'
+import { useHookstate } from '@hookstate/core'
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
-import Error from './componentes/Error'
 import LoginCallbackGoogle from './componentes/LoginCallbackGoogle'
+import { autenticacao } from './estadosglobais/autenticacao'
 import Home from './paginas/Home'
 import Login from "./paginas/Login"
 
 function App() {
-  const [authentication, setAuthentication] = useState(null)
+  const auth = useHookstate(autenticacao)
+  const { token, errorMsg } = auth.get()
 
-  if (authentication === null) {
+  // Se houve erro, disponibiliza somente a rota de Login
+  if (errorMsg !== null && errorMsg !== "") {
     return (
       <BrowserRouter>
         <Switch>
-
-          <Route exact path="/login/callback/google" >
-            <LoginCallbackGoogle setAuthentication={setAuthentication} />
-          </Route>
-
-          <Route exact path="/error">
-            <Error />
-          </Route>
-
-          <Route >
+          <Route exact path="/login" >
             <Login />
           </Route>
 
+          <Route >
+            <Redirect to="/login" />
+          </Route>
         </Switch>
       </BrowserRouter>
     )
   }
 
+  // Se não tem token, disponibiliza as rotas de login
+  if (token === null) {
+    return (
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/login/callback/google" >
+            <LoginCallbackGoogle />
+          </Route>
+
+          <Route exact path="/login" >
+            <Login />
+          </Route>
+
+          <Route >
+            <Redirect to="/login" />
+          </Route>
+        </Switch>
+      </BrowserRouter>
+    )
+  }
+
+  // Se o usuário já está logado, disponibiliza as outras rotas exceto a de login
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/error">
-          <Error />
-        </Route>
 
         <Route exact path="/home">
-          <Home nome={authentication.data.nome} token={authentication.data.token} />
+          <Home />
         </Route>
 
         <Route >

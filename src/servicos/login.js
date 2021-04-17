@@ -1,8 +1,9 @@
 import axios from 'axios'
+import { urlBackendLogin } from '../constantes/urls'
 
 async function loginGoogle(code) {
     const requestOptions = {
-        url: "http://localhost:2000/login/google",
+        url: urlBackendLogin,
         method: 'POST',
         headers: {
             'Accept': 'application/json',
@@ -12,9 +13,13 @@ async function loginGoogle(code) {
             code: code
         }
     }
-    
-    const result = await axios(requestOptions)
-    return result
+
+    try {
+        const result = await axios(requestOptions)
+        return result.data
+    } catch (error) {
+        throw "Backend Login Error: " + error.message
+    }
 }
 
 export { loginGoogle }
