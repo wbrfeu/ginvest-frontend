@@ -40,10 +40,11 @@ export default function Login() {
                 <Typography component="h1" variant="h5">
                     Login
                 </Typography>
-                <br />
+                <br/>
                 <a href={process.env.REACT_APP_GOOGLELOGIN} >
                     <img src={ImgBotaoGoogle} alt="Login com Google" />
                 </a>
+                <br/>
                 <AlertaErro msg={errorMsg} />
 
             </div>

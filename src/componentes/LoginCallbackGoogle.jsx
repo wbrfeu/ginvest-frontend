@@ -11,9 +11,22 @@ export default function LoginCallbackGoogle() {
     const location = useLocation()
     const qs = queryString.parse(location.search)
 
-    // TODO - Testar este Redirect se está funcionando
+    if(qs.error !== undefined && qs.error !== "") {
+        auth.set({
+            nome: null,
+            token: null,
+            errorMsg: "Google Service Error: " + qs.error
+        })
+        return <Redirect to="/login"/>
+    }
+
     if (qs.code === undefined || qs.state !== "ginvest") {
-        return <Redirect to="/login" />
+        auth.set({
+            nome: null,
+            token: null,
+            errorMsg: "Google Service Error: Undefined Code or State Violation"
+        })
+        return <Redirect to="/login"/>
     }
 
     // Passa o "code" para o backend fazer o login
@@ -26,7 +39,6 @@ export default function LoginCallbackGoogle() {
             })
         })
         .catch((err) => {
-            // TODO - Adicionar mensagem específica de erro do Axios
             auth.set({
                 nome: null,
                 token: null,
@@ -41,4 +53,9 @@ export default function LoginCallbackGoogle() {
 exemplo de URL de retorno do Google:
 http://localhost:3000/login/callback/google?state=ginvest&code=4%2F0AY0e-g76xT9rDz0RD0Lq6vjj4h_JWBhJQNOLtIfnk3CroL0yZErMxaaIRBDiKo9t_njgpg&scope=openid&authuser=0&prompt=consent#
 
+// Possível retorno do Google com ERRO
+http://localhost:3000/login/callback/google?error=access_denied_putaquepariu
+
+
+http://localhost:3000/login/callback/google?state=bl
 */

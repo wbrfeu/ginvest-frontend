@@ -16,9 +16,10 @@ async function loginGoogle(code) {
 
     try {
         const result = await axios(requestOptions)
+        sessionStorage.setItem("autenticacao", JSON.stringify(result.data))
         return result.data
     } catch (error) {
-        throw "Backend Login Error: " + error.message
+        throw "Service Login Error: " + error.message
     }
 }
 
