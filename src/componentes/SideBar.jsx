@@ -16,11 +16,11 @@ function SideBar() {
                 <ListItemText primary="Dashboard" />
             </ListItem>
 
-            <ListItem button component={NavLink} to="/ativos">
+            <ListItem button component={NavLink} to="/meusinvestimentos">
                 <ListItemIcon>
                     <ViewListIcon />
                 </ListItemIcon>
-                <ListItemText primary="Ativos" />
+                <ListItemText primary="Meus Investimentos" />
             </ListItem>
 
             <ListItem button component={NavLink} to="/relatorios">

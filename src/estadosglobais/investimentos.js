@@ -1,5 +1,5 @@
 import { createState } from '@hookstate/core'
 
-const investimentos = createState(null)
+const meusInvestimentos = createState(null)
 
-export { investimentos }
+export { meusInvestimentos }

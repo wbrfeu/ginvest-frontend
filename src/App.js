@@ -2,7 +2,7 @@ import { useHookstate } from '@hookstate/core'
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
 import LoginCallbackGoogle from './componentes/LoginCallbackGoogle'
 import { autenticacao } from './estadosglobais/autenticacao'
-import Ativos from './paginas/Ativos'
+import MeusInvestimentos from './paginas/MeusInvestimentos'
 import Dashboard from './paginas/Dashboard'
 import Home from './paginas/Home'
 import Login from "./paginas/Login"
@@ -63,8 +63,8 @@ function App() {
           <Dashboard />
         </Route>
 
-        <Route exact path="/ativos">
-          <Ativos />
+        <Route exact path="/meusinvestimentos">
+          <MeusInvestimentos />
         </Route>
 
         <Route exact path="/relatorios">
