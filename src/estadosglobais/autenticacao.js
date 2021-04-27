@@ -8,7 +8,7 @@ function leSessionStorage() {
         token: null,
         errorMsg: null 
     }
-
+    
     const strArmazenada = sessionStorage.getItem("autenticacao")
 
     if(strArmazenada === null) {
@@ -19,8 +19,7 @@ function leSessionStorage() {
     obj.nome = objTemp.nome
     obj.token = objTemp.token
 
-    // TODO - Ler da Session Storage e retornar o seu conteúdo
     return obj
 }
 
-export { autenticacao }
+export { autenticacao, leSessionStorage }

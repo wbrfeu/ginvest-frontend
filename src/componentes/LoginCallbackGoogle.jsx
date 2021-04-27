@@ -11,6 +11,8 @@ export default function LoginCallbackGoogle() {
     const location = useLocation()
     const qs = queryString.parse(location.search)
 
+    // Se houver algum erro na resposta do Google seta a variavel de estado de erro
+    // com a informação de erro e ela vai ser mostrada na tela de login
     if(qs.error !== undefined && qs.error !== "") {
         auth.set({
             nome: null,
@@ -20,6 +22,8 @@ export default function LoginCallbackGoogle() {
         return <Redirect to="/login"/>
     }
 
+    // Se o Google respondeu sem um código de erro, seta variável de estado
+    // com informação de Undefined e retorna para a tela de login com essa informação
     if (qs.code === undefined || qs.state !== "ginvest") {
         auth.set({
             nome: null,
@@ -42,7 +46,7 @@ export default function LoginCallbackGoogle() {
             auth.set({
                 nome: null,
                 token: null,
-                errorMsg: err
+                errorMsg: JSON.stringify(err.message)
             })
         })
 
@@ -57,5 +61,5 @@ http://localhost:3000/login/callback/google?state=ginvest&code=4%2F0AY0e-g76xT9r
 http://localhost:3000/login/callback/google?error=access_denied_putaquepariu
 
 
-http://localhost:3000/login/callback/google?state=bl
+http://localhost:3000/login/callback/google?state=bla
 */

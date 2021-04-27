@@ -34,6 +34,8 @@ export default function Login() {
         <Container component="main" maxWidth="xs">
             <CssBaseline />
             <div className={classes.paper}>
+                <h1>GInvest</h1>
+                <br/>
                 <Avatar className={classes.avatar}>
                     <PersonIcon />
                 </Avatar>

@@ -47,7 +47,7 @@ export default function DashboardItens() {
 
     return (
         <div>
-            <canvas id="myChart" width="400" height="400"></canvas>
+            <h3>{JSON.stringify(invest.get())}</h3>
         </div>
     )
 }
