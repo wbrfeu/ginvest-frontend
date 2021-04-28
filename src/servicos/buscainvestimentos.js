@@ -1,10 +1,11 @@
 import axios from 'axios'
 import { urlBackendInvestimentos } from '../constantes/urls'
 import { leSessionStorage } from '../estadosglobais/autenticacao'
+import { capturaErro } from './capturaerro'
 
-async function buscaInvestimentos() {
+async function buscaInvestimentos() {    
     const token = leSessionStorage().token
-    
+   
     const requestOptions = {
         url: urlBackendInvestimentos,
         method: 'GET',
@@ -18,8 +19,8 @@ async function buscaInvestimentos() {
     try {
         const result = await axios(requestOptions)
         return result.data
-    } catch (error) {
-        throw new Error("Service 'Busca Investimentos' Error: " + error.message)
+    } catch (error) {        
+        throw new Error("Erro ao Buscar os Investimentos: " + capturaErro(error))
     }
 }
 

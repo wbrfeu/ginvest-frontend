@@ -3,6 +3,8 @@ import { useHookstate } from '@hookstate/core'
 import queryString from 'query-string'
 import { loginGoogle } from "../servicos/login"
 import { autenticacao } from "../estadosglobais/autenticacao"
+import Inicializando from "./Inicializando"
+import { rotaLogin } from "../constantes/rotas"
 
 export default function LoginCallbackGoogle() {
     const auth = useHookstate(autenticacao)
@@ -19,7 +21,7 @@ export default function LoginCallbackGoogle() {
             token: null,
             errorMsg: "Google Service Error: " + qs.error
         })
-        return <Redirect to="/login"/>
+        return <Redirect to = {rotaLogin}/>
     }
 
     // Se o Google respondeu sem um código de erro, seta variável de estado
@@ -30,7 +32,7 @@ export default function LoginCallbackGoogle() {
             token: null,
             errorMsg: "Google Service Error: Undefined Code or State Violation"
         })
-        return <Redirect to="/login"/>
+        return <Redirect to = {rotaLogin}/>
     }
 
     // Passa o "code" para o backend fazer o login
@@ -50,7 +52,7 @@ export default function LoginCallbackGoogle() {
             })
         })
 
-    return <h1>Aguardando resposta ...</h1>
+    return <Inicializando />
 }
 
 /*

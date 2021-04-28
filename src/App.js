@@ -7,6 +7,7 @@ import Dashboard from './paginas/Dashboard'
 import Home from './paginas/Home'
 import Login from "./paginas/Login"
 import Relatorios from './paginas/Relatorios'
+import { rotaCallbackGoogel, rotaDashboard, rotaHome, rotaLogin, rotaMeusInvest, rotaRelatorios } from './constantes/rotas'
 
 function App() {
   const auth = useHookstate(autenticacao)
@@ -17,12 +18,12 @@ function App() {
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/login" >
+          <Route exact path = {rotaLogin} >
             <Login />
           </Route>
 
           <Route >
-            <Redirect to="/login" />
+            <Redirect to = {rotaLogin} />
           </Route>
         </Switch>
       </BrowserRouter>
@@ -34,16 +35,16 @@ function App() {
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path="/login/callback/google" >
+          <Route exact path = {rotaCallbackGoogel} >
             <LoginCallbackGoogle />
           </Route>
 
-          <Route exact path="/login" >
+          <Route exact path = {rotaLogin} >
             <Login />
           </Route>
 
           <Route >
-            <Redirect to="/login" />
+            <Redirect to = {rotaLogin} />
           </Route>
         </Switch>
       </BrowserRouter>
@@ -55,24 +56,24 @@ function App() {
     <BrowserRouter>
       <Switch>
 
-        <Route exact path="/home">
+        <Route exact path = {rotaHome}>
           <Home />
         </Route>
 
-        <Route exact path="/dashboard">
+        <Route exact path = {rotaDashboard}>
           <Dashboard />
         </Route>
 
-        <Route exact path="/meusinvestimentos">
+        <Route exact path = {rotaMeusInvest}>
           <MeusInvestimentos />
         </Route>
 
-        <Route exact path="/relatorios">
+        <Route exact path = {rotaRelatorios}>
           <Relatorios />
         </Route>
 
         <Route >
-          <Redirect to="/home" />
+          <Redirect to = {rotaHome} />
         </Route>
 
       </Switch>
