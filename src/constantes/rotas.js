@@ -1,6 +1,6 @@
 const rotaLogin = "/login"
 
-const rotaCallbackGoogel = "/login/callback/google"
+const rotaCallbackGoogle = "/login/callback/google"
 
 const rotaHome = "/home"
 
@@ -10,11 +10,14 @@ const rotaMeusInvest = "/meusinvestimentos"
 
 const rotaRelatorios = "/relatorios"
 
+const rotaLogout = "/logout"
+
 export {
     rotaLogin,
-    rotaCallbackGoogel,
+    rotaCallbackGoogle,
     rotaHome,
     rotaDashboard,
     rotaMeusInvest,
-    rotaRelatorios
+    rotaRelatorios,
+    rotaLogout
 }

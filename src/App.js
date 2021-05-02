@@ -7,35 +7,18 @@ import Dashboard from './paginas/Dashboard'
 import Home from './paginas/Home'
 import Login from "./paginas/Login"
 import Relatorios from './paginas/Relatorios'
-import { rotaCallbackGoogel, rotaDashboard, rotaHome, rotaLogin, rotaMeusInvest, rotaRelatorios } from './constantes/rotas'
+import { rotaCallbackGoogle, rotaDashboard, rotaHome, rotaLogin, rotaMeusInvest, rotaRelatorios } from './constantes/rotas'
 
 function App() {
-  const auth = useHookstate(autenticacao)
-  const { token, errorMsg } = auth.get()
+  const auth = useHookstate(autenticacao) // "autenticação" ela é criada pelo fato de ser importada
+  const { token } = auth.get()
 
-  // Se houve erro, disponibiliza somente a rota de Login
-  if (errorMsg !== null && errorMsg !== "") {
-    return (
-      <BrowserRouter>
-        <Switch>
-          <Route exact path = {rotaLogin} >
-            <Login />
-          </Route>
-
-          <Route >
-            <Redirect to = {rotaLogin} />
-          </Route>
-        </Switch>
-      </BrowserRouter>
-    )
-  }
-
-  // Se não tem token, disponibiliza as rotas de login
+  // Se não tem usuário logado, disponibiliza somente as rotas de login
   if (token === null) {
     return (
       <BrowserRouter>
         <Switch>
-          <Route exact path = {rotaCallbackGoogel} >
+          <Route exact path = {rotaCallbackGoogle} >
             <LoginCallbackGoogle />
           </Route>
 

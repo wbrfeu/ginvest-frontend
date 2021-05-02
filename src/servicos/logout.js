@@ -1,12 +1,21 @@
-import { autenticacao } from '../estadosglobais/autenticacao'
+import { autenticacao, removeAutenticacaoStorage } from '../estadosglobais/autenticacao'
+import { meusInvestimentos, removeInvestimentosStorage } from '../estadosglobais/investimentos'
 
 function logout() {
-    sessionStorage.removeItem("autenticacao")
+    removeAutenticacaoStorage()
+    removeInvestimentosStorage()
 
     autenticacao.set({
         nome: null,
         token: null,
         errorMsg: null 
+    })
+
+    meusInvestimentos.set({
+        td: null,
+        acoes: null,
+        fii: null,
+        tit_priv: null
     })
 }
 

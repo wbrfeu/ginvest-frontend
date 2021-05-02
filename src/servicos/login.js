@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { urlBackendLogin } from '../constantes/urls'
+import { salvaAutenticacaoStorage } from '../estadosglobais/autenticacao'
 import { capturaErro } from './capturaerro'
 
 async function loginGoogle(code) {
@@ -17,7 +18,7 @@ async function loginGoogle(code) {
 
     try {
         const result = await axios(requestOptions)
-        sessionStorage.setItem("autenticacao", JSON.stringify(result.data))
+        salvaAutenticacaoStorage(result.data)
         return result.data
     } catch (error) {
         throw new Error(capturaErro(error))

@@ -1,53 +1,37 @@
 import { useHookstate } from "@hookstate/core"
 import { meusInvestimentos } from "../../estadosglobais/investimentos"
-
-//import { Chart } from 'chart.js'
+import { calculaTotaisTD, calculaTotaisAcoes, calculaTotaisTitPriv, calculaTotaisFII } from "../../servicos/calculos"
+import PieInvestimentos from "../charts/PieInvestimentos"
+import TabelaInvestimentos from "./TabelaInvestimentos"
+import Box from '@material-ui/core/Box'
 
 export default function DashboardItens() {
     const invest = useHookstate(meusInvestimentos)
+    let totaisTD = calculaTotaisTD(invest.get().td)
+    let totaisAcoes = calculaTotaisAcoes(invest.get().acoes)
+    let totaisTitPriv = calculaTotaisTitPriv(invest.get().tit_priv)
+    let totaisFII = calculaTotaisFII(invest.get().fii)
 
-    // Faz cálculos para montar os graficos e tabelas:
+    // TODO - Apagar as 3 Linhas abaixo
+    totaisAcoes += 90000
+    totaisTitPriv += 80000
+    totaisFII += 70000
 
-    // var ctx = document.getElementById('myChart');
-    // var myChart = new Chart(ctx, {
-    //     type: 'bar',
-    //     data: {
-    //         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-    //         datasets: [{
-    //             label: '# of Votes',
-    //             data: [12, 19, 3, 5, 2, 3],
-    //             backgroundColor: [
-    //                 'rgba(255, 99, 132, 0.2)',
-    //                 'rgba(54, 162, 235, 0.2)',
-    //                 'rgba(255, 206, 86, 0.2)',
-    //                 'rgba(75, 192, 192, 0.2)',
-    //                 'rgba(153, 102, 255, 0.2)',
-    //                 'rgba(255, 159, 64, 0.2)'
-    //             ],
-    //             borderColor: [
-    //                 'rgba(255, 99, 132, 1)',
-    //                 'rgba(54, 162, 235, 1)',
-    //                 'rgba(255, 206, 86, 1)',
-    //                 'rgba(75, 192, 192, 1)',
-    //                 'rgba(153, 102, 255, 1)',
-    //                 'rgba(255, 159, 64, 1)'
-    //             ],
-    //             borderWidth: 1
-    //         }]
-    //     },
-    //     options: {
-    //         scales: {
-    //             y: {
-    //                 beginAtZero: true
-    //             }
-    //         }
-    //     }
-    // })
+    const totalGeral = totaisTD + totaisAcoes + totaisTitPriv + totaisFII
 
+    const data = [
+        { name: 'Ações', value: totaisAcoes, percent: (100 * totaisAcoes / totalGeral) },
+        { name: 'Tesouro', value: totaisTD, percent: (100 * totaisTD / totalGeral) },
+        { name: 'Títulos Privados', value: totaisTitPriv, percent: (100 * totaisTitPriv / totalGeral) },
+        { name: 'FII', value: totaisFII, percent: (100 * totaisFII / totalGeral) },
+    ]
 
     return (
-        <div>
-            <h3>{JSON.stringify(invest.get())}</h3>
+        <div style={{ width: '100%' }}>
+            <Box display="flex" flexWrap="wrap" p={1} m={1} >
+                <TabelaInvestimentos dados={data} total={totalGeral} />
+                <PieInvestimentos dados={data} />
+            </Box>
         </div>
     )
 }

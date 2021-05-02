@@ -7,6 +7,7 @@ import Inicializando from "./Inicializando"
 import { rotaLogin } from "../constantes/rotas"
 
 export default function LoginCallbackGoogle() {
+    // Faz a ligação com a variável de estado
     const auth = useHookstate(autenticacao)
     
     // Pega a URL da resposta do Google e extrai os parâmetros dela

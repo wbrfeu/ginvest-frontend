@@ -11,7 +11,7 @@ export default function Home() {
     const invest = useHookstate(meusInvestimentos)
     const erro = useHookstate(erroGlobal)
     
-    if (invest.get() === null) {
+    if (invest.get().td === null || invest.get().acoes === null || invest.get().fii === null || invest.get().tit_priv === null) {
         buscaInvestimentos()
         .then((result) => {
             invest.set(result)

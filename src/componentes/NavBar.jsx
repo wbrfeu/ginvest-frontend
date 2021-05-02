@@ -15,6 +15,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import SideBar from './SideBar'
 import { ExitToApp } from '@material-ui/icons'
 import { logout } from '../servicos/logout'
+import { rotaLogout } from '../constantes/rotas'
 
 const drawerWidth = 240;
 
@@ -111,6 +112,7 @@ function NavBar(props) {
 
     const handleLogout = () => {
         logout()
+        window.URL = rotaLogout
     }
 
     return (

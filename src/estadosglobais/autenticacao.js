@@ -1,25 +1,35 @@
 import { createState } from '@hookstate/core'
 
-const autenticacao = createState(leSessionStorage())
+// "autenticação" ela é criada pelo fato de ser importada por outro módulo
+const key = "autenticacao"
+const autenticacao = createState(leAutenticacaoStorage())
 
-function leSessionStorage() {
-    const obj = {
-        nome: null,
-        token: null,
-        errorMsg: null 
-    }
-    
-    const strArmazenada = sessionStorage.getItem("autenticacao")
+function leAutenticacaoStorage() {
+    const strArmazenada = sessionStorage.getItem(key)
 
-    if(strArmazenada === null) {
-        return obj
+    if (strArmazenada === null) {
+        return {
+            nome: null,
+            token: null,
+            errorMsg: null
+        }
     }
 
     const objTemp = JSON.parse(strArmazenada)
-    obj.nome = objTemp.nome
-    obj.token = objTemp.token
 
-    return obj
+    return {
+        nome: objTemp.nome,
+        token: objTemp.token,
+        errorMsg: null
+    }
 }
 
-export { autenticacao, leSessionStorage }
+function salvaAutenticacaoStorage(obj) {
+    sessionStorage.setItem(key, JSON.stringify(obj))
+}
+
+function removeAutenticacaoStorage() {
+    sessionStorage.removeItem(key)
+}
+
+export { autenticacao, leAutenticacaoStorage, salvaAutenticacaoStorage, removeAutenticacaoStorage }
