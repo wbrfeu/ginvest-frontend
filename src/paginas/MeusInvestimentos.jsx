@@ -1,9 +1,15 @@
-import { useHookstate } from '@hookstate/core'
-import NavBar from '../componentes/NavBar'
-import { meusInvestimentos } from '../estadosglobais/investimentos'
+import TabelaAcoes from '../componentes/meusinvestimentos/TabelaAcoes'
+import TabelaFII from '../componentes/meusinvestimentos/TabelaFII'
+import TabelaTitPriv from '../componentes/meusinvestimentos/TabelaTitPriv'
+import TabelaTD from '../componentes/meusinvestimentos/TabelaTD'
 
 export default function MeusInvestimentos() {
-    const invest = useHookstate(meusInvestimentos)
-
-    return <NavBar inside={ <h4>{JSON.stringify(invest.get())}</h4> }/>
+    return (
+        <div>
+            <TabelaTD/>
+            <TabelaAcoes/>
+            <TabelaFII/>
+            <TabelaTitPriv/>
+        </div>
+    )
 }

@@ -1,5 +1,4 @@
-import NavBar from '../componentes/NavBar'
 
 export default function Relatorios() {
-    return <NavBar inside={ <h1>Relatórios:</h1> }/>
+    return <h1>Relatórios</h1>
 }

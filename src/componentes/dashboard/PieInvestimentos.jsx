@@ -6,23 +6,25 @@ export default function PieInvestimentos(props) {
 
     return (
         <PieChart width={500} height={300} >
-            <Legend 
-                verticalAlign="bottom" 
+            <Legend
+                verticalAlign="bottom"
                 height={20}
                 iconType='circle'
                 iconSize={10}
             />
-                
-            <Pie 
-                data={dados} 
-                dataKey="value" 
-                nameKey="name" 
-                cx="50%" 
-                cy="50%" 
+
+            <Pie
+                data={dados}
+                dataKey="percent"
+                nameKey="name"
+                cx="50%"
+                cy="50%"
                 outerRadius={100}
                 legendType='line'
-            >
-                {dados.map((entry, index) => (<Cell key={'nada'+index} fill={cores[index]}/>))}
+                label
+            >               
+
+                {dados.map((entry, index) => (<Cell key={'nada' + index} fill={cores[index]} />))}
             </Pie>
         </PieChart>
     )

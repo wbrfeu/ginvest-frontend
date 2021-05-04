@@ -19,9 +19,6 @@ async function buscaInvestimentos() {
 
     try {
         const result = await axios(requestOptions)
-        console.log("Result DATA")
-        console.log(result.data)
-        console.log(result)
         salvaInvestimentosStorage(result.data)
         return result.data
     } catch (error) {        

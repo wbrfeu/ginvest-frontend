@@ -1,5 +1,4 @@
 import { useHookstate } from '@hookstate/core'
-import NavBar from '../componentes/NavBar'
 import OlaUsuario from '../componentes/OlaUsuario'
 import { meusInvestimentos } from '../estadosglobais/investimentos'
 import { buscaInvestimentos } from '../servicos/buscainvestimentos'
@@ -21,5 +20,5 @@ export default function Home() {
         })
     }
 
-    return <NavBar inside={ <OlaUsuario/> }/>
+    return <OlaUsuario/>
 }

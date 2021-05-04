@@ -17,15 +17,15 @@ const useStyles = makeStyles({
 
 const StyledTableCell = withStyles((theme) => ({
     head: {
-        backgroundColor: "#8d9db6",
-        color: theme.palette.common.white,
-        fontSize: 16,
+        backgroundColor: "#e0e2e4",
+        color: theme.palette.common.black,
+        fontSize: 14,
     },
-    body: { fontSize: 16, },
+    body: { fontSize: 14, },
     footer: { 
-        fontSize: 16,
-        backgroundColor: "#8d9db6",
-        color: theme.palette.common.white,
+        fontSize: 14,
+        backgroundColor: "#e0e2e4",
+        color: theme.palette.common.black,
     },
 }))(TableCell)
 
@@ -39,7 +39,8 @@ const StyledTableRow = withStyles((theme) => ({
 
 const StyledTableContainer = withStyles((theme) => ({
     root: {
-        width: 500,
+        width: 450,
+
     },
 }))(TableContainer)
 
@@ -50,8 +51,8 @@ export default function TabelaInvestimentos(props) {
 
     return (
         <StyledTableContainer component={Paper} >
-            <Table className={classes.table} aria-label="customized table">
-                <TableHead>
+            <Table className={classes.table} aria-label="customized table" size="small" >
+                <TableHead >
                     <TableRow>
                         <StyledTableCell>Ativos</StyledTableCell>
                         <StyledTableCell align="right">Valor Atual (R$)</StyledTableCell>
@@ -62,9 +63,7 @@ export default function TabelaInvestimentos(props) {
                 <TableBody>
                     {dados.map((row) => (
                         <StyledTableRow key={row.name}>
-                            <StyledTableCell component="th" scope="row">
-                                {row.name}
-                            </StyledTableCell>
+                            <StyledTableCell component="th" scope="row">{row.name}</StyledTableCell>
                             <StyledTableCell align="right">{formataDinheiroBR(row.value)}</StyledTableCell>
                             <StyledTableCell align="right">{formataPercentualBR(row.percent)}</StyledTableCell>
                         </StyledTableRow>

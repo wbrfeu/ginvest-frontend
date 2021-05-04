@@ -12,6 +12,8 @@ const rotaRelatorios = "/relatorios"
 
 const rotaLogout = "/logout"
 
+const rotaNotaNegocTD = "/nntd"
+
 export {
     rotaLogin,
     rotaCallbackGoogle,
@@ -19,5 +21,6 @@ export {
     rotaDashboard,
     rotaMeusInvest,
     rotaRelatorios,
-    rotaLogout
+    rotaLogout,
+    rotaNotaNegocTD
 }
