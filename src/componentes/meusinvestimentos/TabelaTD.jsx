@@ -9,13 +9,11 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import TableFooter from '@material-ui/core/TableFooter'
 import Paper from '@material-ui/core/Paper'
-import AddCircleIcon from '@material-ui/icons/AddCircle'
-import IconButton from '@material-ui/core/IconButton'
 import { formataDataBR, formataDinheiroBR, formataPercentualBR } from '../../servicos/formatacao'
 import { v4 as uuidv4 } from 'uuid'
-import { rotaNotaNegocTD } from "../../constantes/rotas"
-import { NavLink } from 'react-router-dom'
 
+// TODO - Permitir deletar linhas já cadastradas dos investimentos(Ativos). 
+// Não pode colocar lixeira na linha, é necessário fazer uma página de exclusão de ativos.
 
 const useStyles = makeStyles({
     table: {
@@ -73,22 +71,6 @@ export default function TabelaTD() {
 
     return (
         <div>
-            <table>
-                <tbody>
-                    <tr>
-                        <td>
-                            <h3>Tesouro Direto</h3>
-                        </td>
-
-                        <td>
-                            <IconButton color="primary" component={NavLink} to = {rotaNotaNegocTD}>
-                                <AddCircleIcon />
-                            </IconButton>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-
             <StyledTableContainer component={Paper} >
                 <Table className={classes.table} aria-label="customized table" size="small">
                     <TableHead>

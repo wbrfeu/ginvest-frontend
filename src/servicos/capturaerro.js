@@ -10,7 +10,7 @@ function capturaErro(error) {
     return msg
 }
 
-// Se o tipo de obj é um objeto dá uma stringuificada se não volta o próprio
+// Se o tipo de obj é um objeto dá uma stringuificada, se não, volta o próprio
 // tipo primitivo (number, boolean...)
 function toString(obj) {
     let msg = JSON.stringify(obj)

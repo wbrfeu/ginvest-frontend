@@ -7,7 +7,7 @@ function formataDinheiroBR(valor) {
 function formataPercentualBR(valor) {
     if (valor === null) { return null }
 
-    return valor.toLocaleString('pt-BR', {minimumFractionDigits: 1, maximumFractionDigits: 1}) + " %"
+    return valor.toLocaleString('pt-BR', {minimumFractionDigits: 0, maximumFractionDigits: 0}) + " %"
 }
 
 function formataDataBR(data) {

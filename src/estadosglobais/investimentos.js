@@ -1,18 +1,21 @@
 import { createState } from '@hookstate/core'
 
 const key = "investimentos"
+
+const meusInvestimentosInicial = {
+    td: null,
+    acoes: null,
+    fii: null,
+    tit_priv: null
+}
+
 const meusInvestimentos = createState(leInvestimentosStorage())
 
 function leInvestimentosStorage() {
     const strArmazenada = sessionStorage.getItem(key)
 
     if (strArmazenada === null) {
-        return {
-            td: null,
-            acoes: null,
-            fii: null,
-            tit_priv: null
-        }
+        return meusInvestimentosInicial
     }
 
     const objTemp = JSON.parse(strArmazenada)
@@ -33,4 +36,4 @@ function removeInvestimentosStorage() {
     sessionStorage.removeItem(key)
 }
 
-export { meusInvestimentos, leInvestimentosStorage, salvaInvestimentosStorage, removeInvestimentosStorage }
+export { meusInvestimentos, meusInvestimentosInicial, leInvestimentosStorage, salvaInvestimentosStorage, removeInvestimentosStorage }

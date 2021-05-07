@@ -13,15 +13,15 @@ export default function Dashboard() {
     let totaisFII = calculaTotaisFII(invest.get().fii)
 
     // TODO - Apagar as 3 Linhas abaixo
-    totaisAcoes += 90000
-    totaisTitPriv += 80000
-    totaisFII += 70000
+    totaisAcoes += 10000
+    totaisTitPriv += 10000
+    totaisFII += 10000
 
     const totalGeral = totaisTD + totaisAcoes + totaisTitPriv + totaisFII
 
     const data = [
         { name: 'Ações', value: totaisAcoes, percent: Math.round(100 * totaisAcoes / totalGeral) },
-        { name: 'Tesouro', value: totaisTD, percent: Math.round(100 * totaisTD / totalGeral) },
+        { name: 'Tesouro Direto', value: totaisTD, percent: Math.round(100 * totaisTD / totalGeral) },
         { name: 'Títulos Privados', value: totaisTitPriv, percent: Math.round(100 * totaisTitPriv / totalGeral) },
         { name: 'FII', value: totaisFII, percent: Math.round(100 * totaisFII / totalGeral) },
     ]

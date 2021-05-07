@@ -10,7 +10,15 @@ import AddCircleIcon from '@material-ui/icons/AddCircle'
 import Button from '@material-ui/core/Button'
 import { Grid } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
+import { enviaNovaNotaTD } from '../servicos/envia-novanota-td'
+import { meusInvestimentos, meusInvestimentosInicial, removeInvestimentosStorage } from '../estadosglobais/investimentos'
+import { rotaHome } from '../constantes/rotas'
+import { useHookstate } from '@hookstate/core'
+import { Redirect } from 'react-router-dom'
+import { erroGlobal } from '../estadosglobais/erro-global'
+import DialogoErro from '../componentes/DialogoErro'
 
+// TODO - a lista de CORRETORAS deve ser obtida do backend
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -24,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
         minWidth: 150,
     },
     delete: {
-        verticalAlign:"bottom"
+        verticalAlign: "bottom"
     },
 }))
 
@@ -47,6 +55,8 @@ const notaNegocInicial = {
 
 export default function NotaNegocTD() {
     const classes = useStyles()
+    const erro = useHookstate(erroGlobal)
+    const invest = useHookstate(meusInvestimentos)
     let [notaNegoc, setNotaNegoc] = useState(notaNegocInicial)
 
     // Vê qual objeto foi alterado e modifica no set o obj da Nota Negoc
@@ -88,7 +98,7 @@ export default function NotaNegocTD() {
     }
 
     // ADICIONA uma nova linha os títulos
-    const handleAdNota = () => {
+    const handleAdicionaTitulo = () => {
         const notaNegocAlterada = { ...notaNegoc }
         notaNegocAlterada.titulos.push({ ...notaNegocTitInicial })
         setNotaNegoc(notaNegocAlterada)
@@ -105,11 +115,27 @@ export default function NotaNegocTD() {
         setNotaNegoc(notaNegocAlterada)
     }
 
-    // Faz COMMIT na nova nota de negociação
     const handleSave = () => {
-        console.log('Salvando Dados')
+        enviaNovaNotaTD(notaNegoc)
+            .then((result) => {
+                removeInvestimentosStorage()
+                invest.set(meusInvestimentosInicial)    // Ao voltar para Home força execução de buscaInvestimentos()
+                setNotaNegoc(notaNegocInicial)  // zera o estado da nota de negociação para inicial, para que ao entrar na tela novamente esteja tudo apagado
+            })
+            .catch((err) => {
+                erro.set(err.message)
+            })
     }
 
+    if (erro.get() !== null) {
+        return <DialogoErro />
+    }
+
+    if (invest.get().td === null || invest.get().acoes === null || invest.get().fii === null || invest.get().tit_priv === null) {
+        return <Redirect to={rotaHome} />
+    }
+
+    // TODO - a lista de títulos deve ser obtida do backend
     const listaTitulos = (i) => {
         return (
             <FormControl className={classes.formControl}>
@@ -137,6 +163,20 @@ export default function NotaNegocTD() {
         )
     }
 
+    const listaCorretoras = () => {
+        return (
+            <FormControl className={classes.formControl}>
+                <InputLabel id="corretora">Corretora</InputLabel>
+                <Select name="select-corretora" value={notaNegoc.idCorretora} onChange={handleChange} >
+                    <MenuItem value=""><em>nenhuma</em></MenuItem>
+                    <MenuItem value={"easy"}>Easynvest</MenuItem>
+                    <MenuItem value={"clear"}>Clear</MenuItem>
+                    <MenuItem value={"xp"}>XP</MenuItem>
+                </Select>
+            </FormControl>
+        )
+    }
+
     return (
         <div>
             <h3>Nota de Negociação de Tesouro Direto</h3>
@@ -144,17 +184,9 @@ export default function NotaNegocTD() {
 
                 <TextField name="numero-nota" label="Número da Nota" value={notaNegoc.numeroNotaNegociacao} onChange={handleChange} />
 
-                <TextField name="data-negoc" label="Data Negociação" value={notaNegoc.dataNegociacao} onChange={handleChange} />
+                <TextField name="data-negoc" label="Data Negociação" helperText="d/m/aaaa" value={notaNegoc.dataNegociacao} onChange={handleChange} />
 
-                <FormControl className={classes.formControl}>
-                    <InputLabel id="corretora">Corretora</InputLabel>
-                    <Select name="select-corretora" value={notaNegoc.idCorretora} onChange={handleChange} >
-                        <MenuItem value=""><em>nenhuma</em></MenuItem>
-                        <MenuItem value={"easy"}>Easynvest</MenuItem>
-                        <MenuItem value={"clear"}>Clear</MenuItem>
-                        <MenuItem value={"xp"}>XP</MenuItem>
-                    </Select>
-                </FormControl>
+                { listaCorretoras() }
 
                 <h3 style={{ color: 'gray' }}>Títulos</h3>
 
@@ -165,8 +197,8 @@ export default function NotaNegocTD() {
                                 {listaTitulos(i)}
                                 {listaCV(i)}
                                 <TextField name={`quantidade_${i}`} label="Quantidade" value={titulo.quantidade} onChange={handleChange} />
-                                <TextField name={`valorliq_${i}`} label="Valor Líquido" value={titulo.valorLiquido} onChange={handleChange} />
-                                
+                                <TextField name={`valorliq_${i}`} label="Valor Líquido R$" value={titulo.valorLiquido} onChange={handleChange} />
+
                                 <IconButton name={`lixeira_${i}`} className={classes.delete} onClick={handleDelete}>
                                     <DeleteIcon />
                                 </IconButton>
@@ -176,7 +208,7 @@ export default function NotaNegocTD() {
                     })
                 }
 
-                <IconButton onClick={handleAdNota} >
+                <IconButton onClick={handleAdicionaTitulo} >
                     <AddCircleIcon />
                 </IconButton>
                 <br />

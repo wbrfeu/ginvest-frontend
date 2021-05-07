@@ -10,8 +10,6 @@ const rotaMeusInvest = "/meusinvestimentos"
 
 const rotaRelatorios = "/relatorios"
 
-const rotaLogout = "/logout"
-
 const rotaNotaNegocTD = "/nntd"
 
 export {
@@ -21,6 +19,5 @@ export {
     rotaDashboard,
     rotaMeusInvest,
     rotaRelatorios,
-    rotaLogout,
     rotaNotaNegocTD
 }
