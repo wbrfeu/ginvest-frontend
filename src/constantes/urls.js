@@ -1,8 +1,12 @@
-const urlBackendLogin = "http://localhost:2000/login/google"
+const urlBackend = "http://localhost:2000" // Camonho Base do Backend
 
-const urlBackendInvestimentos = "http://localhost:2000/investimentos"
+const urlBackendLogin = urlBackend + "/login/google"
 
-const urlBackendSalvaNovaNotaNegoc = "http://localhost:2000/td/novann"
+const urlBackendInvestimentos = urlBackend + "/investimentos"
+
+const urlBackendSalvaNovaNotaNegoc = urlBackend + "/td/novann"
+
+const urlBackendTabUteis = urlBackend + "/tabelasuteis"
 
 
-export { urlBackendLogin, urlBackendInvestimentos, urlBackendSalvaNovaNotaNegoc }
+export { urlBackendLogin, urlBackendInvestimentos, urlBackendSalvaNovaNotaNegoc, urlBackendTabUteis }

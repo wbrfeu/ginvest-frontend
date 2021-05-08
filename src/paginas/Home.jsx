@@ -11,6 +11,7 @@ export default function Home() {
     const invest = useHookstate(meusInvestimentos)
     const erro = useHookstate(erroGlobal)
 
+    // só vai buscar os investimentos no backend se não houver valores atualizados no estado global
     if (invest.get().td === null || invest.get().acoes === null || invest.get().fii === null || invest.get().tit_priv === null) {
         buscaInvestimentos()
             .then((result) => {
@@ -20,6 +21,8 @@ export default function Home() {
                 erro.set(err.message)
             })
     }
+
+    // TODO - Importar tabelas úteis aqui....
 
     return (
         <>
