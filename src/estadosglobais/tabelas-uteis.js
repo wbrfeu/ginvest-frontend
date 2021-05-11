@@ -38,4 +38,4 @@ function removeTabelasUteisStorage() {
     sessionStorage.removeItem(key)
 }
 
-export { tabelasUteis, leTabelasUteisStorage, salvaTabelasUteisStorage, removeTabelasUteisStorage }
+export { tabelasUteis, tabelasUteisInicial, leTabelasUteisStorage, salvaTabelasUteisStorage, removeTabelasUteisStorage }

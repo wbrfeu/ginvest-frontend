@@ -12,13 +12,12 @@ import { Grid } from '@material-ui/core'
 import DeleteIcon from '@material-ui/icons/Delete'
 import { enviaNovaNotaTD } from '../servicos/envia-novanota-td'
 import { meusInvestimentos, meusInvestimentosInicial, removeInvestimentosStorage } from '../estadosglobais/investimentos'
+import { tabelasUteis } from '../estadosglobais/tabelas-uteis'
 import { rotaHome } from '../constantes/rotas'
 import { useHookstate } from '@hookstate/core'
 import { Redirect } from 'react-router-dom'
 import { erroGlobal } from '../estadosglobais/erro-global'
 import DialogoErro from '../componentes/DialogoErro'
-
-// TODO - a lista de CORRETORAS deve ser obtida do backend
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -57,6 +56,7 @@ export default function NotaNegocTD() {
     const classes = useStyles()
     const erro = useHookstate(erroGlobal)
     const invest = useHookstate(meusInvestimentos)
+    const tabuteis = useHookstate(tabelasUteis)
     let [notaNegoc, setNotaNegoc] = useState(notaNegocInicial)
 
     // Vê qual objeto foi alterado e modifica no set o obj da Nota Negoc
@@ -135,16 +135,15 @@ export default function NotaNegocTD() {
         return <Redirect to={rotaHome} />
     }
 
-    // TODO - a lista de títulos deve ser obtida do backend
     const listaTitulos = (i) => {
         return (
             <FormControl className={classes.formControl}>
                 <InputLabel id="titulo">Título</InputLabel>
                 <Select name={`select-titulo_${i}`} value={notaNegoc.titulos[i].codIsin} onChange={handleChange} >
                     <MenuItem value=""><em>nenhum</em></MenuItem>
-                    <MenuItem value={"BRSTNCLTN7U7"}>Tesouro Prefixado 2026</MenuItem>
-                    <MenuItem value={"BRSTNCNTB2U0"}>Tesouro IPCA+ 2045</MenuItem>
-                    <MenuItem value={"BRSTNCLTN7K8"}>Tesouro Prefixado 2022</MenuItem>
+                    {tabuteis.get().td.map((t, i) => 
+                        <MenuItem key={`corret_${i}`} value={t.codIsin}>{t.nome}</MenuItem>
+                    )}
                 </Select>
             </FormControl>
         )
@@ -162,6 +161,7 @@ export default function NotaNegocTD() {
             </FormControl>
         )
     }
+    
 
     const listaCorretoras = () => {
         return (
@@ -169,9 +169,9 @@ export default function NotaNegocTD() {
                 <InputLabel id="corretora">Corretora</InputLabel>
                 <Select name="select-corretora" value={notaNegoc.idCorretora} onChange={handleChange} >
                     <MenuItem value=""><em>nenhuma</em></MenuItem>
-                    <MenuItem value={"easy"}>Easynvest</MenuItem>
-                    <MenuItem value={"clear"}>Clear</MenuItem>
-                    <MenuItem value={"xp"}>XP</MenuItem>
+                    {tabuteis.get().corretoras.map((c, i) => 
+                        <MenuItem key={`corret_${i}`} value={c.idCorretora}>{c.nome}</MenuItem>
+                    )}
                 </Select>
             </FormControl>
         )
@@ -186,7 +186,7 @@ export default function NotaNegocTD() {
 
                 <TextField name="data-negoc" label="Data Negociação" helperText="d/m/aaaa" value={notaNegoc.dataNegociacao} onChange={handleChange} />
 
-                { listaCorretoras() }
+                {listaCorretoras()}
 
                 <h3 style={{ color: 'gray' }}>Títulos</h3>
 
