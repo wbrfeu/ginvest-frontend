@@ -59,9 +59,19 @@ export default function NotaNegocTD() {
     const tabuteis = useHookstate(tabelasUteis)
     let [notaNegoc, setNotaNegoc] = useState(notaNegocInicial)
 
+    const clonaNotaNegoc = () => {
+        const notaNegocClonada = { ...notaNegoc }
+        const titulosClonados = notaNegocClonada.titulos.map((t) => {
+            return {...t}
+        })
+
+        notaNegocClonada.titulos = titulosClonados
+        return notaNegocClonada
+    }
+
     // Vê qual objeto foi alterado e modifica no set o obj da Nota Negoc
     const handleChange = (event) => {
-        const notaNegocAlterada = { ...notaNegoc }
+        const notaNegocAlterada = clonaNotaNegoc()
 
         if (event.target.name === "numero-nota") {
             notaNegocAlterada.numeroNotaNegociacao = event.target.value

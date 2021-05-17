@@ -4,10 +4,10 @@ function formataDinheiroBR(valor) {
     return valor.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})
 }
 
-function formataPercentualBR(valor) {
+function formataPercentualBR(valor, digitos = 0) {
     if (valor === null) { return null }
 
-    return valor.toLocaleString('pt-BR', {minimumFractionDigits: 0, maximumFractionDigits: 0}) + " %"
+    return valor.toLocaleString('pt-BR', {minimumFractionDigits: digitos, maximumFractionDigits: digitos}) + " %"
 }
 
 function formataDataBR(data) {
