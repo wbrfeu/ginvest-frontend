@@ -15,6 +15,8 @@ import { v4 as uuidv4 } from 'uuid'
 // TODO - Permitir deletar linhas já cadastradas dos investimentos(Ativos). 
 // Não pode colocar lixeira na linha, é necessário fazer uma página de exclusão de ativos.
 
+// TODO - Incluir na tabela de TD o perído em que o título está aplicado.
+
 const useStyles = makeStyles({
     table: {
         minWidth: 600,
@@ -85,7 +87,7 @@ export default function TabelaTD() {
                             <StyledTableCell align="right">IR</StyledTableCell>
                             <StyledTableCell align="right">Resultado Líq.</StyledTableCell>
                             <StyledTableCell align="center">Resultado Líq. %</StyledTableCell>
-                            <StyledTableCell align="center">Resultado Mensal</StyledTableCell>
+                            <StyledTableCell align="center">Resultado Líq. Mensal</StyledTableCell>
                         </TableRow>
                     </TableHead>
 
@@ -102,7 +104,7 @@ export default function TabelaTD() {
                                 <StyledTableCell align="right">{formataDinheiroBR(row.ir)}</StyledTableCell>
                                 <StyledTableCell align="right">{formataDinheiroBR(row.resultadoLiquido)}</StyledTableCell>
                                 <StyledTableCell align="center">{formataPercentualBR(row.resultadoLiquidoPercent)}</StyledTableCell>
-                                <StyledTableCell align="center">{formataPercentualBR(row.rentabLiqMensalCorresp)}</StyledTableCell>
+                                <StyledTableCell align="center">{formataPercentualBR(row.rentabLiqMensalCorresp, 2)}</StyledTableCell>
                             </StyledTableRow>
                         ))}
                     </TableBody>
