@@ -22,4 +22,10 @@ function formataDataBR(data) {
     return dataFormatada
 }
 
-export { formataDinheiroBR, formataPercentualBR, formataDataBR }
+function formataNumero(valor, digitos = 0) {
+    if (valor === null) { return null }
+
+    return valor.toLocaleString('pt-BR', {minimumFractionDigits: digitos, maximumFractionDigits: digitos})
+}
+
+export { formataDinheiroBR, formataPercentualBR, formataDataBR, formataNumero }

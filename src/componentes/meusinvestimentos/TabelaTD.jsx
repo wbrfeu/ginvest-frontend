@@ -9,7 +9,7 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import TableFooter from '@material-ui/core/TableFooter'
 import Paper from '@material-ui/core/Paper'
-import { formataDataBR, formataDinheiroBR, formataPercentualBR } from '../../servicos/formatacao'
+import { formataDataBR, formataDinheiroBR, formataNumero, formataPercentualBR } from '../../servicos/formatacao'
 import { v4 as uuidv4 } from 'uuid'
 
 // TODO - Permitir deletar linhas já cadastradas dos investimentos(Ativos). 
@@ -97,7 +97,7 @@ export default function TabelaTD() {
                                 <StyledTableCell component="th" scope="row">{row.nome}</StyledTableCell>
                                 <StyledTableCell align="center">{formataDataBR(row.dataNegociacao)}</StyledTableCell>
                                 <StyledTableCell align="center">{row.idCorretora}</StyledTableCell>
-                                <StyledTableCell align="center">{row.quantidade}</StyledTableCell>
+                                <StyledTableCell align="center">{formataNumero(row.quantidade, 2)}</StyledTableCell>
                                 <StyledTableCell align="right">{formataDinheiroBR(row.valorUnitarioAtualVenda * row.quantidade)}</StyledTableCell>
                                 <StyledTableCell align="right">{formataDinheiroBR(row.resultadoBruto)}</StyledTableCell>
                                 <StyledTableCell align="center">{formataPercentualBR(row.resultadoBrutoPercent)}</StyledTableCell>
