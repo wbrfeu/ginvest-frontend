@@ -1,3 +1,5 @@
+// TODO - frontend está exibindo data com fusorário errado
+
 function formataDinheiroBR(valor) {
     if (valor === null) { return null }
 

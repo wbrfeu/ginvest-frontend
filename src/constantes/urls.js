@@ -1,4 +1,6 @@
-const urlBackend = "http://localhost:2000" // Caminho Base do Backend
+// const urlBackend = "http://localhost:2000" // Caminho Base do Backend local
+
+const urlBackend = "http://34.68.109.223:2000" // Caminho Base do Backend cloud Google
 
 const urlBackendLogin = urlBackend + "/login/google"
 

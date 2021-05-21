@@ -15,6 +15,8 @@ import { v4 as uuidv4 } from 'uuid'
 // TODO - Permitir deletar linhas já cadastradas dos investimentos(Ativos). 
 // Não pode colocar lixeira na linha, é necessário fazer uma página de exclusão de ativos.
 
+// TODO - colocar uma imagem de esperando para o carregamento dos estoques td, está tendo atraso na cloud
+
 // TODO - Incluir na tabela de TD o perído em que o título está aplicado.
 
 const useStyles = makeStyles({
