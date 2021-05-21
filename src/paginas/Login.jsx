@@ -8,6 +8,8 @@ import ImgBotaoGoogle from '../static/btn_google_signin_light_normal_web.png'
 import AlertaErro from '../componentes/AlertaErro'
 import { useHookstate } from '@hookstate/core'
 import { autenticacao } from '../estadosglobais/autenticacao'
+import { rotaCallbackGoogle } from '../constantes/rotas'
+import { urlFrontend } from '../constantes/urls'
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -30,6 +32,14 @@ export default function Login() {
     const auth = useHookstate(autenticacao)
     const { errorMsg } = auth.get()
 
+    const urlGoogle = () => {
+        const redirect_uri = urlFrontend + rotaCallbackGoogle
+
+        const urlGoogleFinal = `https://accounts.google.com/o/oauth2/v2/auth?scope=openid%20email%20profile&include_granted_scopes=true&response_type=code&state=ginvest&redirect_uri=${redirect_uri}&client_id=269809466369-ib246j23i04lolir3kl97rimp041ptoc.apps.googleusercontent.com&prompt=select_account`
+
+        return urlGoogleFinal
+    }
+
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
@@ -43,7 +53,7 @@ export default function Login() {
                     Login
                 </Typography>
                 <br/>
-                <a href={process.env.REACT_APP_GOOGLELOGIN} >
+                <a href={ urlGoogle() } >
                     <img src={ImgBotaoGoogle} alt="Login com Google" />
                 </a>
                 <br/>
