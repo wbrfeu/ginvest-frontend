@@ -34,9 +34,7 @@ export default function Login() {
 
     const urlGoogle = () => {
         const redirect_uri = urlFrontend + rotaCallbackGoogle
-
         const urlGoogleFinal = `https://accounts.google.com/o/oauth2/v2/auth?scope=openid%20email%20profile&include_granted_scopes=true&response_type=code&state=ginvest&redirect_uri=${redirect_uri}&client_id=269809466369-ib246j23i04lolir3kl97rimp041ptoc.apps.googleusercontent.com&prompt=select_account`
-
         return urlGoogleFinal
     }
 
